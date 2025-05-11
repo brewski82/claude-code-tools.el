@@ -1,0 +1,43 @@
+# Compiled
+*.elc
+*.so
+*.o
+*.a
+*.la
+*.lo
+*.dylib
+
+# Packages
+*.tar
+*.tar.*
+*.jar
+*.class
+
+# Logs and backups
+*~
+*\#
+.\#*
+.*.swp
+*.log
+*.tmp
+
+# Emacs backup files
+\#*\#
+.\#*
+*~
+
+# Auto-save files
+auto-save-list
+tramp
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# Directories
+.cache/
+.cask/
+elpa/
+.Trash/
+.DS_Store
+.claude/
