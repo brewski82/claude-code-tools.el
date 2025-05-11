@@ -113,6 +113,16 @@ If you experience flickering in vterm buffers when using Claude Code, try settin
 (setq vterm-timer-delay nil)
 ```
 
+### Fixing vterm Enter Key in Transient Menus
+
+If you encounter issues where the Enter key doesn't work in transient menus when using vterm (error: "Unbound suffix: '<return>'"), you can fix this with the following configuration:
+
+```elisp
+(define-key vterm-mode-map [return] nil t)
+```
+
+This workaround resolves a bug where vterm's double definition of the return key breaks transient menu functionality. See [issue #765](https://github.com/akermu/emacs-libvterm/issues/765) for more details.
+
 ## Related Packages
 
 This package was inspired by:
