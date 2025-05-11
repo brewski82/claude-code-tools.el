@@ -126,6 +126,27 @@ session, allowing for complex prompt building."
     (message "Set claude code buffer name to: %s" selected-buffer)))
 
 ;;;###autoload
+(defun claude-code-tools-create-buffer-for-current-session ()
+  "Create a new buffer and set its Claude session to the current
+project.
+
+Creates a new buffer named 'claude-prompt-PROJECT' and associates
+it with the Claude Code session of the current project. This is
+useful for preparing complex prompts across multiple buffers for
+the same Claude session."
+  (interactive)
+  (let* ((project-name (file-name-nondirectory
+                        (directory-file-name
+                         (project-root (project-current)))))
+         (buffer-name (format "claude-prompt-%s" project-name))
+         (claude-buffer (claude-code-tools-current-claude-code-buffer-name))
+         (new-buffer (get-buffer-create buffer-name)))
+    (switch-to-buffer new-buffer)
+    (setq claude-code-tools-claude-code-buffer-name-local claude-buffer)
+    (message "Created buffer %s associated with Claude session %s"
+             buffer-name claude-buffer)))
+
+;;;###autoload
 (defun claude-code-tools-send-to-claude ()
   "Interactively send a plain text message to Claude Code.
 
@@ -295,7 +316,8 @@ diffs."
    [ "Session"
      ("O" "open session" claude-code-tools-claude-code-vterm)
      ("S" "select session" claude-code-tools-set-claude-code-buffer-name)
-     ("W" "in new worktree" claude-code-tools-open-in-new-worktree)]])
+     ("W" "in new worktree" claude-code-tools-open-in-new-worktree)
+     ("B" "new prompt buffer" claude-code-tools-create-buffer-for-current-session)]])
 
 (provide 'claude-code-tools)
 ;;; claude-code-tools.el ends here
